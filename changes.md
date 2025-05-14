@@ -9,9 +9,9 @@ date: 2025-05-14
 title: pwauth Change Log
 ---
 
-## VERSION 2.3.11
+## [v2.3.11](https://github.com/edwardtheharris/pwauth/releases/tag/v2.3.11)
 
-- May 14, 2025
+- Aug 1, 2018
   - Don't define "uid" variable if SERVER_UID is not defined.
   - Removed old-style strchr prototype.
   - Clarified some instructions in config.h.
