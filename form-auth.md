@@ -71,3 +71,7 @@ good practice NOT to tell the user which of these two occured.
 
 With reasonable caution, this is as secure as using 'pwauth' with
 mod_auth_external or mod_authnz_external.
+
+```{sectionauthor} Jan Wolter <jan@unixpapa.com>
+
+```

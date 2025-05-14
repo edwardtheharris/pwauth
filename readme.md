@@ -6,7 +6,7 @@ authors:
   - name: Xander Harris
     email: xandertheharris@gmail.com
 date: 2025-05-14
-title: pwauth 2.3.10
+title: pwauth 2.3.10 readme
 ---
 
 Pwauth is a conceptually a simple program. You run it, giving it a login

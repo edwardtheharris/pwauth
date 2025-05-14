@@ -18,8 +18,6 @@ sphinx-git = "*"
 sphinx-last-updated-by-git = "*"
 sphinxcontrib-autoyaml = "*"
 version-query = "*"
+black = "*"
 
 [dev-packages]
-
-[requires]
-python_version = "3.13"

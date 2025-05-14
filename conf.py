@@ -36,6 +36,7 @@ exclude_patterns = [
     ".venv/*",
 ]
 extensions = [
+    "hawkmoth",
     "myst_parser",
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",

@@ -209,3 +209,7 @@ is to use mod_authz_unixgroup. This will not only allow you to restrict
 logins to users in particular groups, but restrict access to individual
 files based on group ownership of the files, if used with the standard Apache
 module mod_authz_owner.
+
+```{sectionauthor} Jan Wolter <jan@unixpapa.com>
+
+```

@@ -11,11 +11,18 @@ title: pwauth docs index
 
 Gonna needs some API docs and maybe a usage guide.
 
+## General information
+
 ```{toctree}
 form-auth
-pwauth/index
 install
 readme
+```
+
+## API Docs
+
+```{toctree}
+pwauth/index
 ```
 
 ## miscellaneous
