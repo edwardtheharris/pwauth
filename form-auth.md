@@ -38,18 +38,20 @@ Here's a sample function in Perl that does exactly this. It assumes that
 the 'pwauth' program has been compiled with ENV*METHOD \_NOT* defined (which
 is generally more secure).
 
-    $pwauth_path= "/usr/local/libexec/pwauth";
+```{code-block} perl
+$pwauth_path= "/usr/local/libexec/pwauth";
 
-    sub trypass {
-       my $userid= $_[0];
-       my $passwd= $_[1];
+sub trypass {
+    my $userid= $_[0];
+    my $passwd= $_[1];
 
-       open PWAUTH, "|$pwauth_path" or
-         die("Could not run $pwauth_path");
-       print PWAUTH "$userid\n$passwd\n";
-       close PWAUTH;
-       return !$?;
-    }
+    open PWAUTH, "|$pwauth_path" or
+      die("Could not run $pwauth_path");
+    print PWAUTH "$userid\n$passwd\n";
+    close PWAUTH;
+    return !$?;
+}
+```
 
 Obviously the $pwauth_path should be defined to wherever you install pwauth,
 and the die() call should be replaced with whatever is an appropriate way

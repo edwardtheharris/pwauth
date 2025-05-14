@@ -17,7 +17,7 @@ authentication from a Unix password file, though it can be used in other ways
 too.
 
 Mod_auth_external and mod_authnz_external are available from
-http://www.unixpapa.com/mod_auth_external/
+[mod_auth_external](http://www.unixpapa.com/mod_auth_external/)
 
 Pwauth ends up being slightly more complex because of the lack of consistancy
 in the way different versions of Unix do authentication. It includes code
@@ -45,7 +45,7 @@ security weaknesses.
 
 Having said that, authenticating from a Unix password file is an idea that
 many sensible people find seriously questionable. See Apache's FAQ
-(http://httpd.apache.org/docs/misc/FAQ-G.html#passwdauth) for a overview
+([passwdauth](http://httpd.apache.org/docs/misc/FAQ-G.html#passwdauth)) for an overview
 of some of the issues. Pwauth has features that can address most of the
 arguments made here, if correctly configured, but you need to be aware of
 the issues and extremely careful. I've used it for many years without
@@ -60,4 +60,6 @@ information is in the comments in the "pwauth.h" file.
 Versions of pwauth before version 2.2.8 were distributed as part of the
 mod_auth_external distribution.
 
-Author and Maintainer: Jan Wolter http://www.unixpapa.com/
+```{sectionauthor} Jan Wolter <jan@unixpapa.com>
+
+```
