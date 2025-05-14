@@ -21,3 +21,4 @@ version-query = "*"
 black = "*"
 
 [dev-packages]
+cpp-coveralls = "*"
