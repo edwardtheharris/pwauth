@@ -53,8 +53,9 @@ git_untracked_check_dependencies = False
 graphviz_output_format = "png"
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
-html_favicon = "_static/img/pwauth.png"
 html_context = {"full_path": str(Path(".").resolve())}
+html_favicon = "_static/img/pwauth.png"
+html_logo = "_static/img/pwauth.png"
 html_static_path = ["_static"]
 html_theme = "sphinx_book_theme"
 myst_enable_extensions = [

@@ -9,11 +9,6 @@ date: 2025-05-14
 title: pwauth 2.3.10
 ---
 
-    		       pwauth 2.3.10
-                             Author: Jan Wolter
-
-    	      http://www.unixpapa.com/pwauth/
-
 Pwauth is a conceptually a simple program. You run it, giving it a login
 and a password, and it returns a status code telling whether or not that
 login/password is valid. It is designed to be combined with mod_auth_external

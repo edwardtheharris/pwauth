@@ -1,6 +1,8 @@
 ---
 abstract: This is the documentation index for pwauth.
 authors:
+  - name: Jan Wolter
+    email: jan@unixpapa.com
   - name: Xander Harris
     email: xandertheharris@gmail.com
 date: 2025-05-14
@@ -21,4 +23,13 @@ readme
 ```{toctree}
 .github/index
 changes
+```
+
+### Acknowledgements
+
+Many thanks to the [Unix Papa](https://www.unixpapa.com), Jan Wolter, who
+originally wrote this software in 1996.
+
+```{sectionauthor} Xander Harris <xandertheharris@gmail.com>
+
 ```
