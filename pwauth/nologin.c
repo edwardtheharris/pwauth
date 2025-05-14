@@ -6,7 +6,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -38,16 +38,15 @@
  * uid is below MIN_NOLOGIN_UID.
  */
 
-check_nologin()
-{
-    /* Return true if the file does not exist (the access() function returns
-     * true if the file doesn't exist - pretty dumb, eh?) */
-    if (access(NOLOGIN_FILE, F_OK))
-	return 1;
+int check_nologin() {
+  /* Return true if the file does not exist (the access() function returns
+   * true if the file doesn't exist - pretty dumb, eh?) */
+  if (access(NOLOGIN_FILE, F_OK))
+    return 1;
 #if MIN_NOLOGIN_UID > 0
-    if (hisuid < MIN_NOLOGIN_UID)
-	return 1;
+  if (hisuid < MIN_NOLOGIN_UID)
+    return 1;
 #endif
-    return 0;
+  return 0;
 }
 #endif

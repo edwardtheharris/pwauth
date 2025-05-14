@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
 #endif
 
   if (status == STATUS_OK) {
-    /* Good login */
+/* Good login */
 #ifdef UNIX_LASTLOG
     lastlog();
 #endif
