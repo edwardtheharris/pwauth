@@ -1,24 +1,29 @@
-			       pwauth 2.3.10
+---
+abstract: This is the readme for pwauth.
+authors:
+  - name: Jan Wolter
+    email: jan@unixpapa.com
+  - name: Xander Harris
+    email: xandertheharris@gmail.com
+date: 2025-05-14
+title: pwauth 2.3.10 readme
+---
 
-                             Author: Jan Wolter
-
-		      http://www.unixpapa.com/pwauth/
-
-Pwauth is a conceptually a simple program.  You run it, giving it a login
+Pwauth is a conceptually a simple program. You run it, giving it a login
 and a password, and it returns a status code telling whether or not that
-login/password is valid.  It is designed to be combined with mod_auth_external
+login/password is valid. It is designed to be combined with mod_auth_external
 (or mod_authnz_external) and Apache to give reasonably secure HTTP
 authentication from a Unix password file, though it can be used in other ways
 too.
 
 Mod_auth_external and mod_authnz_external are available from
-http://www.unixpapa.com/mod_auth_external/
+[mod_auth_external](http://www.unixpapa.com/mod_auth_external/)
 
 Pwauth ends up being slightly more complex because of the lack of consistancy
-in the way different versions of Unix do authentication.  It includes code
-for doing low-level authentication in most different versions of Unix.  It
+in the way different versions of Unix do authentication. It includes code
+for doing low-level authentication in most different versions of Unix. It
 also can be configured to use one higher-level interface to authentication,
-PAM.  All configuration is compiled in, because in typical applications
+PAM. All configuration is compiled in, because in typical applications
 this program runs very frequently (on every web hit on a protected page),
 so the cumulative overhead of reading a config file on every run would be
 substantial.
@@ -39,20 +44,22 @@ and simple program, it is much easier to assure that it does not have
 security weaknesses.
 
 Having said that, authenticating from a Unix password file is an idea that
-many sensible people find seriously questionable.  See Apache's FAQ
-(http://httpd.apache.org/docs/misc/FAQ-G.html#passwdauth) for a overview
-of some of the issues.  Pwauth has features that can address most of the
+many sensible people find seriously questionable. See Apache's FAQ
+([passwdauth](http://httpd.apache.org/docs/misc/FAQ-G.html#passwdauth)) for an overview
+of some of the issues. Pwauth has features that can address most of the
 arguments made here, if correctly configured, but you need to be aware of
-the issues and extremely careful.  I've used it for many years without
+the issues and extremely careful. I've used it for many years without
 problems on systems that are under almost continuous assault by hackers,
 but none of those systems are at all typical in their security requirements.
 You should think hard about using this software and proceed with caution.
 
-Installation instructions are in the INSTALL file.  The FORM-AUTH file
-discusses using this in form-based authentication applications.  Configuration
+Installation instructions are in the INSTALL file. The FORM-AUTH file
+discusses using this in form-based authentication applications. Configuration
 information is in the comments in the "pwauth.h" file.
 
 Versions of pwauth before version 2.2.8 were distributed as part of the
 mod_auth_external distribution.
 
-Author and Maintainer:  Jan Wolter  http://www.unixpapa.com/
+```{sectionauthor} Jan Wolter <jan@unixpapa.com>
+
+```

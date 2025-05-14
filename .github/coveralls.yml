@@ -1,0 +1,61 @@
+on: ["push", "pull_request", "workflow_dispatch"]
+name: Test Coveralls
+permissions:
+  contents: read
+  issues: read
+  checks: write
+  pull-requests: write
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@main
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: git config
+        run: |
+          git config user.username edwardtheharris
+          git config user.name 'Xander Harris'
+          git config user.email 'xandertheharris@gmail.com'
+          git checkout -b 123-feature-branch-test
+      - name: Install Dependencies
+        run: |
+          pip3 install -U pip pipenv
+          pipenv requirements --dev > reqs
+          pip3 install -r reqs
+          pytest --cov --cov-report=xml --junit-xml=results.xml --
+          sed -i -e "s/__version__/$(git rev-parse --short=8 HEAD)/" sonar-project.properties
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          check_name: python-tests
+          comment_title: Python Results
+          files: results.xml
+      - name: Install tox and any other packages
+        run: pip install tox
+      - name: Run tox
+        run: tox -e py
+      - name: Coveralls
+        uses: coverallsapp/github-action@main
+        with:
+          parallel: true
+          flag-name: run-${{ matrix.python-version }}
+
+  finish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close parallel build
+        uses: coverallsapp/github-action@v1
+        with:
+          parallel-finished: true
+          carryforward: "run-3.11,run-3.12,run-3.13"

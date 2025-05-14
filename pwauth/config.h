@@ -6,7 +6,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -31,14 +31,12 @@
  * =======================================================================
  */
 
-
-/* PWAUTH configuration file 
+/* PWAUTH configuration file
  *
  * Note - the default settings in this file are the way I use it.  I
  * guarantee you, they won't work for you.  You must change them.
  *
  */
-
 
 /* There are lots of different kinds of password databases.  Define one of
  * the following:
@@ -119,17 +117,17 @@
  *    the author.
  */
 
-   /* LOW-LEVEL OPTIONS */
+/* LOW-LEVEL OPTIONS */
 
 /* #define SHADOW_NONE		/**/
 /* #define SHADOW_BSD		/* FreeBSD, NetBSD, OpenBSD, BSDI, OS X */
-#define SHADOW_SUN		/* Linux, Solaris, IRIX */
+#define SHADOW_SUN /* Linux, Solaris, IRIX */
 /* #define SHADOW_JFH		/**/
 /* #define SHADOW_MDW		/**/
 /* #define SHADOW_AIX		/* AIX (see also AUTHENTICATE_AIX) */
 /* #define SHADOW_HPUX		/* HPUX ? */
 
-   /* HIGH-LEVEL OPTIONS */
+/* HIGH-LEVEL OPTIONS */
 
 /* #define PAM			/* Linux PAM or OpenPAM */
 /* #define PAM_OLD_OS_X		/* PAM on OS X version 10.5 or older */
@@ -137,7 +135,6 @@
 /* #define PAM_SOLARIS_26	/* PAM on Solaris 2.6 */
 /* #define LOGIN_CONF_OPENBSD	/* login.conf on OpenBSD */
 /* #define AUTHENTICATE_AIX	/* AIX authenticate() function */
-
 
 /* There is also limited support for three failure logging systems (the
  * database that informs you that "there have been 3426 unsuccessful attempts
@@ -201,7 +198,6 @@
 /* #define MAX_FAIL_COUNT 40			/**/
 /* #define RESET_FAIL_COUNT			/**/
 
-
 /* If UNIX_LASTLOG is defined, the program will update the lastlog entry so
  * that there is a record of the user having logged in.  This is important on
  * systems where you expire unused accounts and some users may only log in
@@ -213,9 +209,8 @@
  * uid numbers.
  */
 
-#define UNIX_LASTLOG		/**/
-#define HAVE_LASTLOG_H		/**/
-
+#define UNIX_LASTLOG   /**/
+#define HAVE_LASTLOG_H /**/
 
 /* If NOLOGIN_FILE is defined to the full path name of a file, then the
  * existance of that file is checked on every login attempt.  If it exists
@@ -227,9 +222,8 @@
  * right with PAM.
  */
 
-#define NOLOGIN_FILE "/etc/nologin"	/**/
-#define MIN_NOLOGIN_UID 1		/**/
-
+#define NOLOGIN_FILE "/etc/nologin" /**/
+#define MIN_NOLOGIN_UID 1           /**/
 
 /* Defining CHECK_LOGIN_EXPIRATION and CHECK_PASSWORD_EXPIRATION causes
  * pwauth to check if the given login has expired, or it's password has
@@ -240,9 +234,8 @@
  * system to test on, I haven't bothered.
  */
 
-#define CHECK_LOGIN_EXPIRATION		/**/
-#define CHECK_PASSWORD_EXPIRATION	/**/
-
+#define CHECK_LOGIN_EXPIRATION    /**/
+#define CHECK_PASSWORD_EXPIRATION /**/
 
 /* It is generally sensible to restrict what users can run pwauth.  Though
  * there are other programs that users can use to test if password guesses
@@ -279,8 +272,7 @@
  * to change the uid list.
  */
 
-#define SERVER_UIDS 30		/* user "wwwrun" on the author's system */
-
+#define SERVER_UIDS 30 /* user "wwwrun" on the author's system */
 
 /* If MIN_UNIX_UID is defined to an integer, logins with uid numbers less than
  * that value will be rejected, even if the password is correct.
@@ -291,8 +283,7 @@
  * given value will be accepted).
  */
 
-#define MIN_UNIX_UID 500	/**/
-
+#define MIN_UNIX_UID 500 /**/
 
 /* If IGNORE_CASE is defined, the login given is checked in two different
  * ways. First without any changes and then with all letters converted to
@@ -302,7 +293,6 @@
 
 /* #define IGNORE_CASE             /**/
 
-
 /* If DOMAIN_AWARE is enabled, then we we check login names to see if they
  * contain a backslash, and discard anything up to and including the backslash.
  * This is for use in environments where there are Windows users accustomed
@@ -310,7 +300,6 @@
  */
 
 /* #define DOMAIN_AWARE            /**/
-
 
 /* On failed authentications, pwauth will sleep for SLEEP_TIME seconds, using
  * a lock on the file whose full path is given by SLEEP_LOCK to prevent any
@@ -322,7 +311,6 @@
 
 #define SLEEP_LOCK "/var/run/pwauth.lock"
 
-
 /* If ENV_METHOD is defined, pwauth expects mod_auth_external to be configured
  *     SetAuthExternalMethod environment
  * instead of
@@ -332,9 +320,8 @@
 
 /* #define ENV_METHOD		/**/
 
-
 /* If /usr/include/paths.h exists define this.  Obviously I need to autoconfig
  * this.
  */
 
-#define PATHS_H 		/**/
+#define PATHS_H /**/
