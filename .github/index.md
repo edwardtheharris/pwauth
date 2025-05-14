@@ -49,3 +49,8 @@ And ShellCheck never hurt anybody either.
 ```{autoyaml} .github/workflows/shell.yml
 
 ```
+
+```{note}
+The [cpp-coveralls](https://github.com/eddyxu/cpp-coveralls?tab=readme-ov-file)
+package is required to run coveralls with c support.
+```
