@@ -80,7 +80,7 @@ jobs:
         # JavaScript, TypeScript or both.
         #
         # Learn more about [CodeQL language support](https://aka.ms/codeql-docs/language-support)
-        language: [ 'javascript-typescript', 'python' ]
+        language: [ 'c-cpp' ]
     steps:
     - name: Checkout repository
       uses: actions/checkout@main
