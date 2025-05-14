@@ -9,14 +9,8 @@ title: pwauth API docs
 
 We'll be using the c domain.
 
-## main.c
-
 ```{eval-rst}
-.. c:autodoc:: main.c
-```
+.. c:macro:: SHADOW_SUN
+   :param comment: /* Linux, Solaris, IRIX */
 
-## config.h
-
-```{eval-rst}
-.. c:autodoc:: config.h
 ```

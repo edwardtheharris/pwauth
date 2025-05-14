@@ -52,6 +52,7 @@ extensions = [
 ]
 git_untracked_check_dependencies = False
 graphviz_output_format = "png"
+hawkmoth_root = Path("pwauth/").absolute()
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 html_context = {"full_path": str(Path(".").resolve())}
