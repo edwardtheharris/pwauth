@@ -15,6 +15,8 @@ sphinx-design = "*"
 sphinx-git = "*"
 sphinx-last-updated-by-git = "*"
 sphinxcontrib-autoyaml = "*"
+clang = "*"
+hawkmoth = "*"
 
 [dev-packages]
 

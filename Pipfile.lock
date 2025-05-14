@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "66642902be20a31a10100db861bf1b6faf4758c365ad14f54a7d1d54006ba06e"
+            "sha256": "4bc481584d1bddd57ff4f9e4b8f2c2264e53bafd108eb7b9559f2d9314cab38d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -166,6 +166,14 @@
             "markers": "python_version >= '3.7'",
             "version": "==3.4.2"
         },
+        "clang": {
+            "hashes": [
+                "sha256:29d485baf936b59dd6a28ef632ee64ad1aa0f611a07bf28bef9c830f83f17a65",
+                "sha256:9f441cb78d7124c443bb6a895bfdcd62b046bf6abab129bd29563d8ac7bc021e"
+            ],
+            "index": "pypi",
+            "version": "==20.1.0"
+        },
         "click": {
             "hashes": [
                 "sha256:6b303f0b2aa85f1cb4e5303078fadcbcd4e476f114fab9b5007005711839325c",
@@ -236,6 +244,15 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==0.16.0"
+        },
+        "hawkmoth": {
+            "hashes": [
+                "sha256:49d289f1d61c6ab8b8ce1221e49915056b985c8665bd5cdb6cccbfb5a6038ef1",
+                "sha256:da338218411fdc67b52254f02dbdec162ed4a7db588de7d3a1e5314864fce5cd"
+            ],
+            "index": "pypi",
+            "markers": "python_version ~= '3.9'",
+            "version": "==0.21.0"
         },
         "idna": {
             "hashes": [
