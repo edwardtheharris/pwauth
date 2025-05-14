@@ -37,7 +37,7 @@ title: pwauth Change Log
     disables the sleep-on-failure behavior.
   - Minor documentation fixes
 
-## VERSION 2.3.8
+## [v2.3.8](https://github.com/edwardtheharris/pwauth/releases/tag/v2.3.8)
 
 - Apr 3, 2009
   - Clearing `SERVER_UIDS` now disables the runtime `uid` check. Documentation
