@@ -16,7 +16,7 @@ title: pwauth Change Log
   - Removed old-style strchr prototype.
   - Clarified some instructions in config.h.
 
-## VERSION 2.3.10
+## [v2.3.10](https://github.com/edwardtheharris/pwauth/releases/tag/v2.3.10)
 
 - Oct 5, 2011
   - Changed the serialized sleep code in snooze.c to use fcntl() locking
