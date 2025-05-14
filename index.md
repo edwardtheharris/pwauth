@@ -8,3 +8,7 @@ title: pwauth docs index
 ---
 
 Gonna needs some API docs and maybe a usage guide.
+
+```{toctree}
+pwauth/index
+```
