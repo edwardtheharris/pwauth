@@ -6,7 +6,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -31,77 +31,75 @@
  * =======================================================================
  */
 
-#include <stdio.h>
-#include <sys/types.h>
-#include <utmp.h>
 #include <pwd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <utmp.h>
 
 #include "config.h"
 #include "fail_log.h"
 
+int main(int argc, char **argv) {
+  int i, j;
+  int reset = 0, verbose = 1;
+  char *user = NULL, *msg = NULL;
+  uid_t uid = getuid();
 
-int main(int argc, char **argv)
-{
-    int i, j;
-    int reset= 0, verbose= 1;
-    char *user= NULL, *msg= NULL;
-    uid_t uid= getuid();
+  /* Parse command line */
+  for (i = 1; i < argc; i++) {
+    if (argv[i][0] == '-') {
+      for (j = 1; argv[i][j] != '\0'; j++) {
+        switch (argv[i][j]) {
+        case 'z':
+          reset = 1;
+          break;
+        case 's':
+          verbose = 0;
+          break;
+        default:
+          goto usage;
+        }
+      }
+    } else if (user == NULL)
+      user = argv[i];
+    else
+      goto usage;
+  }
 
-    /* Parse command line */
-    for (i= 1; i < argc; i++)
-    {
-	if (argv[i][0] == '-')
-	{
-	    for (j= 1; argv[i][j] != '\0'; j++)
-	    {
-		switch (argv[i][j])
-		{
-		    case 'z': reset= 1; break;
-		    case 's': verbose= 0; break;
-		    default: goto usage;
-		}
-	    }
-	}
-	else if (user == NULL)
-	    user= argv[i];
-	else
-	    goto usage;
+  /* Root can run this on other user's accounts */
+  if (user != NULL) {
+    struct passwd *pw;
+
+    if ((pw = getpwnam(user)) == NULL) {
+      fprintf(stderr, "%s: User %s does not exist.\n", argv[0], user);
+      exit(2);
     }
 
-    /* Root can run this on other user's accounts */
-    if (user != NULL)
-    {
-	struct passwd *pw;
-
-	if ((pw= getpwnam(user)) == NULL)
-	{
-	    fprintf(stderr,"%s: User %s does not exist.\n", argv[0], user);
-	    exit(2);
-	}
-
-	if (uid != 0 && pw->pw_uid != uid)
-	{
-	    fprintf(stderr,"%s: Only root can access other user's accounts.\n",
-		    argv[0]);
-	    exit(3);
-	}
-
-	uid= pw->pw_uid;
+    if (uid != 0 && pw->pw_uid != uid) {
+      fprintf(stderr, "%s: Only root can access other user's accounts.\n",
+              argv[0]);
+      exit(3);
     }
 
-    /* Do the thing */
+    uid = pw->pw_uid;
+  }
+
+  /* Do the thing */
 #if defined(FAILLOG_JFH) || defined(FAILLOG_OPENBSD)
-    msg= check_fails(uid, reset, verbose);
+  msg = check_fails(uid, reset, verbose);
 #endif
 
-    /* Output the result */
-    if (msg != NULL)
-    	puts(msg);
-    else if (!verbose)
-    	puts("0:::");
+  /* Output the result */
+  if (msg != NULL)
+    puts(msg);
+  else if (!verbose)
+    puts("0:::");
 
-    exit(0);
+  exit(0);
 
-usage: fprintf(stderr,"usage: %s [-z] [-s] [user]\n", argv[0]);
-    exit(1);
+usage:
+  fprintf(stderr, "usage: %s [-z] [-s] [user]\n", argv[0]);
+  exit(1);
 }

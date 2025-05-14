@@ -8,7 +8,7 @@
 # Settings for author's system (Redhat 6.1)
 CC=gcc
 LIB= -lcrypt
-LOCALFLAGS= -g 
+LOCALFLAGS= -g
 
 # For PAM on Redhat Linux
 # LIB=-lpam -ldl

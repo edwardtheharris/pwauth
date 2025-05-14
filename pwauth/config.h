@@ -119,22 +119,22 @@
 
 /* LOW-LEVEL OPTIONS */
 
-/* #define SHADOW_NONE		/**/
-/* #define SHADOW_BSD		/* FreeBSD, NetBSD, OpenBSD, BSDI, OS X */
-#define SHADOW_SUN /* Linux, Solaris, IRIX */
-/* #define SHADOW_JFH		/**/
-/* #define SHADOW_MDW		/**/
-/* #define SHADOW_AIX		/* AIX (see also AUTHENTICATE_AIX) */
-/* #define SHADOW_HPUX		/* HPUX ? */
+// #define SHADOW_NONE		/**/
+// #define SHADOW_BSD		/* FreeBSD, NetBSD, OpenBSD, BSDI, OS X */
+// #define SHADOW_SUN /* Linux, Solaris, IRIX */
+// #define SHADOW_JFH		/**/
+// #define SHADOW_MDW		/**/
+// #define SHADOW_AIX		/* AIX (see also AUTHENTICATE_AIX) */
+// #define SHADOW_HPUX		/* HPUX ? */
 
 /* HIGH-LEVEL OPTIONS */
 
-/* #define PAM			/* Linux PAM or OpenPAM */
-/* #define PAM_OLD_OS_X		/* PAM on OS X version 10.5 or older */
-/* #define PAM_SOLARIS		/* PAM on Solaris other than 2.6 */
-/* #define PAM_SOLARIS_26	/* PAM on Solaris 2.6 */
-/* #define LOGIN_CONF_OPENBSD	/* login.conf on OpenBSD */
-/* #define AUTHENTICATE_AIX	/* AIX authenticate() function */
+// #define PAM /* Linux PAM or OpenPAM */
+// #define PAM_OLD_OS_X		/* PAM on OS X version 10.5 or older */
+// #define PAM_SOLARIS		/* PAM on Solaris other than 2.6 */
+// #define PAM_SOLARIS_26	/* PAM on Solaris 2.6 */
+// #define LOGIN_CONF_OPENBSD	/* login.conf on OpenBSD */
+// #define AUTHENTICATE_AIX	/* AIX authenticate() function */
 
 /* There is also limited support for three failure logging systems (the
  * database that informs you that "there have been 3426 unsuccessful attempts
@@ -222,8 +222,8 @@
  * right with PAM.
  */
 
-#define NOLOGIN_FILE "/etc/nologin" /**/
-#define MIN_NOLOGIN_UID 1           /**/
+// #define NOLOGIN_FILE "/etc/nologin" /**/
+// #define MIN_NOLOGIN_UID 1           /**/
 
 /* Defining CHECK_LOGIN_EXPIRATION and CHECK_PASSWORD_EXPIRATION causes
  * pwauth to check if the given login has expired, or it's password has

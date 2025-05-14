@@ -6,7 +6,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -36,17 +36,18 @@
 #ifdef SHADOW_SUN
 #ifdef NEED_UID
 #include <pwd.h>
+#include <time.h>
 #endif
 #include <shadow.h>
-struct spwd *getspnam();
-char *crypt();
+// struct spwd *getspnam();
+// char *crypt();
 #endif /* SHADOW_SUN */
 
 #ifdef SHADOW_JFH
 #ifdef NEED_UID
 #include <pwd.h>
 #endif
-#include <shadow.h>	  /* this may be hidden in /usr/local/include */
+#include <shadow.h> /* this may be hidden in /usr/local/include */
 struct spwd *getspnam();
 char *pw_encrypt();
 #endif /* SHADOW_JFH */
@@ -54,56 +55,56 @@ char *pw_encrypt();
 #if defined(SHADOW_JFH) || defined(SHADOW_SUN)
 /* ===================== JFH and SUN Authentication ===================== */
 
-
 /* CHECK_AUTH - Check a login and return a status code.
  * (This version for systems with getspnam() call.)
  */
 
-int check_auth(char *login, char *passwd)
-{
-    char *cpass;
-    struct spwd *spwd= getspnam(login);
+int check_auth(char *login, char *passwd) {
+  char *cpass;
+  struct spwd *spwd = getspnam(login);
 #ifdef NEED_UID
-    struct passwd *pwd;
+  struct passwd *pwd;
 #endif
 #if defined(CHECK_LOGIN_EXPIRATION) || defined(CHECK_PASSWORD_EXPIRATION)
-    int today= time(NULL)/(24*60*60);
+  int today = time(NULL) / (24 * 60 * 60);
 #endif
-    if (spwd == NULL)
-    	return(errno == EACCES ? STATUS_INT_NOROOT : STATUS_UNKNOWN);
+  if (spwd == NULL)
+    return (errno == EACCES ? STATUS_INT_NOROOT : STATUS_UNKNOWN);
 #ifdef NEED_UID
-    if ((pwd= getpwnam(login)) == NULL) return(STATUS_UNKNOWN);
-    hisuid= pwd->pw_uid;
-    haveuid= 1;
+  if ((pwd = getpwnam(login)) == NULL)
+    return (STATUS_UNKNOWN);
+  hisuid = pwd->pw_uid;
+  haveuid = 1;
 #endif
 #ifdef MIN_UNIX_UID
-    if (hisuid < MIN_UNIX_UID) return(STATUS_BLOCKED);
+  if (hisuid < MIN_UNIX_UID)
+    return (STATUS_BLOCKED);
 #endif
 #ifdef SHADOW_JFH
-    cpass= pw_encrypt(passwd, spwd->sp_pwdp);
+  cpass = pw_encrypt(passwd, spwd->sp_pwdp);
 #else
-    cpass= crypt(passwd, spwd->sp_pwdp);
+  cpass = crypt(passwd, spwd->sp_pwdp);
 #endif
-    if (!cpass || strcmp(cpass, spwd->sp_pwdp)) return STATUS_INVALID;
+  if (!cpass || strcmp(cpass, spwd->sp_pwdp))
+    return STATUS_INVALID;
 #ifdef CHECK_LOGIN_EXPIRATION
-    if (spwd->sp_expire >= 0 && spwd->sp_expire < today)
-	return STATUS_EXPIRED;
+  if (spwd->sp_expire >= 0 && spwd->sp_expire < today)
+    return STATUS_EXPIRED;
 #endif
 #ifdef CHECK_PASSWORD_EXPIRATION
-    /* Root forced password expiration */
-    if (spwd->sp_lstchg == 0)
-	return STATUS_PW_EXPIRED;
-	    
-    /* Normal password expiration */
-    /* We used to have sp_lstchg + sp_max + sp_inact < today
-     * here, apparantly during the inact period you are only supposed to be able
-     * to get on to change your password, not anything else, show we shouldn't
-     * allow access during that period.
-     */
-    if (spwd->sp_max >= 0 &&
-        spwd->sp_lstchg + spwd->sp_max < today)
-	return STATUS_PW_EXPIRED;
+  /* Root forced password expiration */
+  if (spwd->sp_lstchg == 0)
+    return STATUS_PW_EXPIRED;
+
+  /* Normal password expiration */
+  /* We used to have sp_lstchg + sp_max + sp_inact < today
+   * here, apparantly during the inact period you are only supposed to be able
+   * to get on to change your password, not anything else, show we shouldn't
+   * allow access during that period.
+   */
+  if (spwd->sp_max >= 0 && spwd->sp_lstchg + spwd->sp_max < today)
+    return STATUS_PW_EXPIRED;
 #endif
-    return STATUS_OK;
+  return STATUS_OK;
 }
 #endif /* SHADOW_JFH || SHADOW_SUN */
