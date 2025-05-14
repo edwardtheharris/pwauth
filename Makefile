@@ -27,7 +27,7 @@ TAR= readme.md install.md changes.md form-auth.md Makefile pwauth/main.c pwauth/
 
 CFLAGS= $(LOCALFLAGS)
 
-pwauth: pwauth/main.o pwauth/auth_aix.o pwauth/auth_bsd.o pwauth/auth_hpux.o pwauth/auth_mdw.o pwauth/auth_openbsd.o \
+pwauth/pwauth: pwauth/main.o pwauth/auth_aix.o pwauth/auth_bsd.o pwauth/auth_hpux.o pwauth/auth_mdw.o pwauth/auth_openbsd.o \
 	pwauth/auth_pam.o pwauth/auth_sun.o pwauth/fail_log.o pwauth/lastlog.o pwauth/nologin.o pwauth/snooze.o
 	$(CC) -o pwauth $(CFLAGS) $(LDFLAGS) pwauth/main.o pwauth/auth_aix.o pwauth/auth_bsd.o \
 		pwauth/auth_hpux.o pwauth/auth_mdw.o pwauth/auth_openbsd.o pwauth/auth_pam.o pwauth/auth_sun.o \
