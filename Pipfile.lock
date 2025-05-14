@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "77120a33d33cdc020e68f5835e25416e6f25c8c1e14ec749df89d20a5b468470"
+            "sha256": "482379a818047b408c68a65b03a487004af4e9722dbce75a217671e1a19b5741"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -337,6 +337,14 @@
             "markers": "python_version >= '3.7'",
             "version": "==3.1.6"
         },
+        "linkify-it-py": {
+            "hashes": [
+                "sha256:68cda27e162e9215c17d786649d1da0021a451bdc436ef9e0fa0ba5234b9b048",
+                "sha256:6bcbc417b0ac14323382aef5c5192c0075bf8a9d6b41820a2b66371eac6b6d79"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==2.0.3"
+        },
         "loguru": {
             "hashes": [
                 "sha256:19480589e77d47b8d85b2c827ad95d49bf31b0dcde16593892eb51dd18706eb6",
@@ -447,7 +455,8 @@
         },
         "myst-parser": {
             "extras": [
-                "code_style"
+                "code_style",
+                "linkify"
             ],
             "hashes": [
                 "sha256:5cfea715e4f3574138aecbf7d54132296bfd72bb614d31168f48c477a830a7c4",
@@ -793,6 +802,14 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==4.13.2"
+        },
+        "uc-micro-py": {
+            "hashes": [
+                "sha256:d321b92cff673ec58027c04015fcaa8bb1e005478643ff4a500882eaab88c48a",
+                "sha256:db1dffff340817673d7b466ec86114a9dc0e9d4d9b5ba229d9d60e5c12600cd5"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==1.0.3"
         },
         "urllib3": {
             "hashes": [

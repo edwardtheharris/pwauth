@@ -18,7 +18,7 @@ sphinx-last-updated-by-git = "*"
 sphinxcontrib-autoyaml = "*"
 version-query = "*"
 black = "*"
-myst-parser = {extras = ["code_style"], version = "*"}
+myst-parser = {extras = ["code_style", "linkify"], version = "*"}
 
 [dev-packages]
 cpp-coveralls = "*"
