@@ -34,14 +34,6 @@ The CodeQL workflow provided by GitHub is actually pretty good also.
 
 ```
 
-### black
-
-I still like to run things through black anyway.
-
-```{autoyaml} .github/workflows/coveralls.yml
-
-```
-
 ### shell
 
 And ShellCheck never hurt anybody either.
