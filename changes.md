@@ -9,6 +9,12 @@ date: 2025-05-14
 title: pwauth Change Log
 ---
 
+## v2.3.12
+
+- TBD
+  - Clean up the documentation.
+  - Make the thing build on ArchLinux.
+
 ## [v2.3.11](https://github.com/edwardtheharris/pwauth/releases/tag/v2.3.11)
 
 - Aug 1, 2018
