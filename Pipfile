@@ -7,7 +7,6 @@ name = "pypi"
 clang = "*"
 hawkmoth = "*"
 loguru = "*"
-myst-parser = {extras = ["testing", "code_style", "linkify", "rtd"], version = "*"}
 pipenv = "*"
 sphinx = "*"
 sphinx-autobuild = "*"
@@ -19,6 +18,7 @@ sphinx-last-updated-by-git = "*"
 sphinxcontrib-autoyaml = "*"
 version-query = "*"
 black = "*"
+myst-parser = {extras = ["code_style"], version = "*"}
 
 [dev-packages]
 cpp-coveralls = "*"
