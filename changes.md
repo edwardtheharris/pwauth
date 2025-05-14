@@ -25,7 +25,7 @@ title: pwauth Change Log
     which doesn't seem to support flock() at all any more.
   - Minor fixes to typos in various documentation.
 
-## VERSION 2.3.9
+## [v2.3.9](https://github.com/edwardtheharris/pwauth/releases/tag/v2.3.9)
 
 - May 2, 2011
   - Add AUTHENTICATE_AIX option for authenticating via AIX's authentication
