@@ -11,11 +11,18 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html#project-informatio
 -- General configuration ---------------------------------------------------
 https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 """
-import sys
 from pathlib import Path
+import version_query
 
-sys.path.append(str(Path("ansible/files").resolve()))
-sys.path.append(str(Path("ansible/files/githooks").resolve()))
+
+def get_release():
+    """Set the relase of the current package."""
+    try:
+        cur_release = version_query.query_folder(Path("."))
+    except ValueError:
+        cur_release = version_query.Version(0, 0, 1)
+    return cur_release.to_str()
+
 
 author = "Xander Harris"
 autoyaml_root = "."
@@ -69,8 +76,7 @@ myst_enable_extensions = [
 myst_footnote_transition = True
 myst_title_to_header = True
 project = "Xander's Dot Files and Sundry Store"
-with Path(".version").open("r", encoding="utf-8") as r_fh:
-    release = r_fh.read()
+release = get_release()
 show_authors = True
 source_suffix = {
     ".md": "markdown",

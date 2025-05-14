@@ -10,5 +10,15 @@ title: pwauth docs index
 Gonna needs some API docs and maybe a usage guide.
 
 ```{toctree}
+form-auth
 pwauth/index
+install
+readme
+```
+
+## miscellaneous
+
+```{toctree}
+.github/index
+changes
 ```
