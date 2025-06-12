@@ -1,142 +1,178 @@
 ---
 abstract: This is the pwauth change log.
-
+date: 2025-06-12
 title: pwauth change log
-
 ---
-
 
 All notable changes to this project will be documented in this file.
 
-## [2.3.11] - 2025-06-12
+## [2.3.11]
+
+2025-06-12
 
 ### 💼 Other
 
 - Copy boilerplate
 
-Closes #2
+  Closes #2
+
 - Update codeql
 
-Closes #2
+  Closes #2
+
 - Drop travis
 
-Closes #2
+  Closes #2
+
 - Drop extra docs
 
-Closes #2
+  Closes #2
+
 - Add init docs
 
-Closes #2
+  Closes #2
+
 - Update indexes
 
-Closes #2
+  Closes #2
+
 - Update docs
 
-Closes #2
+  Closes #2
+
 - Add logo, other docs
 
-Closes #2
+  Closes #2
+
 - Update docs some more
 
-Closes #2
+  Closes #2
+
 - Update changes
 
-Closes #2
+  Closes #2
+
 - Update for lint
 
-Closes #2
+  Closes #2
+
 - Fix docs build
 
-Closes #2
+  Closes #2
+
 - Drop requirement for python
 
-Closes #2
+  Closes #2
+
 - Don't run coveralls
 
-Closes #2
+  Closes #2
+
 - Update docs
 
-Closes #2
+  Closes #2
+
 - Update format
 
-Closes #2
+  Closes #2
+
 - Worry about docs later
 
-Closes #2
+  Closes #2
+
 - Update reqs
 
-Closes #2
+  Closes #2
+
 - Update output
 
-Closes #2
+  Closes #2
+
 - Update requirements
 
-Closes #2
+  Closes #2
+
 - Drop updated makefile
 
-Closes #2
+  Closes #2
+
 - Merge pull request #4 from edwardtheharris/2-add-ci
 
-Copy boilerplate
+  Copy boilerplate
 
-Closes #2
+  Closes #2
+
 - Update changelog
 
-Closes #6
+  Closes #6
+
 - Merge pull request #10 from edwardtheharris/6-238
 
-Update changelog
+  Update changelog
 
-Closes #6
+  Closes #6
+
 - Set release 2.3.9
 
-Closes #7
+  Closes #7
+
 - Merge pull request #11 from edwardtheharris/7-239
 
-Set release 2.3.9
+  Set release 2.3.9
 
-Closes #7
+  Closes #7
+
 - Set v2.3.10
 
-Closes #8
+  Closes #8
+
 - Merge pull request #12 from edwardtheharris/8-2310
 
-Set v2.3.10
+  Set v2.3.10
 
-Closes #8
+  Closes #8
+
 - Set 2.3.11
 
-Closes #9
+  Closes #9
+
 - Merge pull request #13 from edwardtheharris/9-2311
 
-Set 2.3.11
+  Set 2.3.11
 
-Closes #9
+  Closes #9
+
 - Update changelog
 
-Closes #5
+  Closes #5
+
 - Merge pull request #14 from edwardtheharris/5-create-releases
 
-Update changelog
+  Update changelog
 
-Closes #5
+  Closes #5
+
 - Fix checkfaillog.c
 
-Closes #15
+  Closes #15
+
 - Merge pull request #16 from edwardtheharris/15-fix-checkfaillogc
 
-Fix checkfaillog.c
+  Fix checkfaillog.c
 
-Closes #15
+  Closes #15
+
 - Add makefile
 
-Closes #17
+  Closes #17
+
 - Update filenames
 
-Closes #17
+  Closes #17
+
 - Update cliff
 
-Closes #17
+  Closes #17
 
 ## [2.3.11] - 2025-06-12
 
@@ -150,45 +186,56 @@ Closes #17
 - Accepting patch from issue #8
 - Handle locked user accounts
 
-Prevent pwauth from crashing when logging into a locked account
+  Prevent pwauth from crashing when logging into a locked account
+
 - Merge pull request #11 from sgtio/master
 
-Handle locked user accounts
+  Handle locked user accounts
+
 - Quiet compiler warnings for signatures
 
-There are missing/incomplete function declarations.  Also a missing
-header.
+  There are missing/incomplete function declarations. Also a missing
+  header.
 
-Signed-off-by: Philip Prindeville <philipp@redfish-solutions.com>
+  Signed-off-by: Philip Prindeville <philipp@redfish-solutions.com>
+
 - Merge pull request #12 from pprindeville/fedora-fixes
 
-Quiet compiler warnings for signatures
+  Quiet compiler warnings for signatures
+
 - Add Travis build instructions
 
-Signed-off-by: Philip Prindeville <philipp@redfish-solutions.com>
+  Signed-off-by: Philip Prindeville <philipp@redfish-solutions.com>
+
 - Merge pull request #14 from pprindeville/travis-support
 
-Add Travis build instructions
+  Add Travis build instructions
 
-## [2.3.10] - 2011-10-05
+## [2.3.10]
+
+2011-10-05
 
 ### 💼 Other
 
-- Convert to using fcntl() locking instead of flock() for improved portability.
-- Add 'pwauth.tar' target to Makefile to make it easier to roll out tarballs
+- Convert to using `fcntl()` locking instead of `flock()` for improved portability.
+- Add {file}`pwauth.tar` target to Makefile to make it easier to roll out tarballs
 
-## [2.3.9] - 2011-05-02
+## [2.3.9]
+
+2011-05-02
 
 ### 💼 Other
 
 - Minor Documentation Fixes
 - Rearranged ifdefs so that undefining SLEEP_LOCK completely disables the
-sleep on failure behavior.
+  sleep on failure behavior.
 - Rearranged ifdefs so that undefining SLEEP_LOCK completely disables the sleep on failure behavior
 - OS X no longer puts the PAM header files in a weird place.
 - AIX authenticate() interface.
 
-## [2.3.8] - 2009-04-03
+## [2.3.8]
+
+2009-04-03
 
 ### 💼 Other
 
