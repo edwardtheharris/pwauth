@@ -29,7 +29,7 @@ pwauth/index
 
 ```{toctree}
 .github/index
-changes
+changelog
 ```
 
 ### Acknowledgements
