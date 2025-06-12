@@ -3,3 +3,6 @@ repos:
     rev: v0.18.1
     hooks:
       - id: markdownlint-cli2
+        args:
+          - "*md"
+          - "**/*md"
