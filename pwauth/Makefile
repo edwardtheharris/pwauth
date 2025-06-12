@@ -16,13 +16,18 @@ LOCALFLAGS= -g
 # LIB=-lpam
 
 # -------------------- No User Servicable Parts Below -----------------------
+help:
+	@$(MAKE) --help
+
+%: help
+
 
 TAR=readme.md install.md CHANGES FORM_AUTH Makefile main.c checkfaillog.c \
 	fail_check.c fail_log.c lastlog.c nologin.c snooze.c auth_aix.c \
 	auth_bsd.c auth_hpux.c auth_mdw.c auth_openbsd.c auth_pam.c \
 	auth_sun.c config.h fail_log.h pwauth.h unixgroup
 
-.PHONY: clean distclean
+.PHONY: clean distclean help
 
 CFLAGS= $(LOCALFLAGS)
 
@@ -60,3 +65,4 @@ distclean:
 
 pwauth.tar: $(TAR)
 	tar cvf pwauth.tar $(TAR)
+
