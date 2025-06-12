@@ -6,11 +6,11 @@ title: pwauth change log
 
 All notable changes to this project will be documented in this file.
 
-## [2.3.11]
+## [2.3.12]
 
 2025-06-12
 
-### 💼 Other
+### 💼 Other (2.3.12)
 
 - Copy boilerplate
 
@@ -174,9 +174,11 @@ All notable changes to this project will be documented in this file.
 
   Closes #17
 
-## [2.3.11] - 2025-06-12
+## [2.3.11]
 
-### 💼 Other
+2025-06-12
+
+### 💼 Other (2.3.11)
 
 - Don't define "uid" if SERVER_UID not defined.
 - Removed old style strchr() prototype.
@@ -215,7 +217,7 @@ All notable changes to this project will be documented in this file.
 
 2011-10-05
 
-### 💼 Other
+### 💼 Other (2.3.10)
 
 - Convert to using `fcntl()` locking instead of `flock()` for improved portability.
 - Add {file}`pwauth.tar` target to Makefile to make it easier to roll out tarballs
@@ -224,7 +226,7 @@ All notable changes to this project will be documented in this file.
 
 2011-05-02
 
-### 💼 Other
+### 💼 Other (2.3.9)
 
 - Minor Documentation Fixes
 - Rearranged ifdefs so that undefining SLEEP_LOCK completely disables the
@@ -237,7 +239,7 @@ All notable changes to this project will be documented in this file.
 
 2009-04-03
 
-### 💼 Other
+### 💼 Other (2.3.8)
 
 - Initial Import
 

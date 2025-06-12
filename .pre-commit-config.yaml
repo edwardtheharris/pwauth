@@ -10,3 +10,5 @@ repos:
         args:
           - "*md"
           - "**/*md"
+          - "#.venv"
+          - "#_build"
