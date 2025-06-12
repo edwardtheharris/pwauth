@@ -22,3 +22,4 @@ myst-parser = {extras = ["code_style", "linkify"], version = "*"}
 
 [dev-packages]
 cpp-coveralls = "*"
+pre-commit = "*"

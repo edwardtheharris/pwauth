@@ -29,7 +29,7 @@ pwauth/index
 
 ```{toctree}
 .github/index
-changes
+changelog
 ```
 
 ### Acknowledgements
@@ -38,5 +38,9 @@ Many thanks to the [Unix Papa](https://www.unixpapa.com), Jan Wolter, who
 originally wrote this software in 1996.
 
 ```{sectionauthor} Xander Harris <xandertheharris@gmail.com>
+
+```
+
+```{sectionauthor} Jan Wolter <jan@unixpapa.com>
 
 ```

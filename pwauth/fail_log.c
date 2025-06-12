@@ -6,7 +6,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -59,7 +59,7 @@ int check_fails()
     {
 	lseek(flfd, hisuid * sizeof(struct faillog), 0);
 	result= (read(flfd, &flog, sizeof(struct faillog))
-	         != sizeof(struct faillog)) || 
+	         != sizeof(struct faillog)) ||
 	        flog.fail_max == 0 || flog.fail_cur < flog.fail_max;
 	close(flfd);
     }

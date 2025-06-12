@@ -6,7 +6,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -85,7 +85,7 @@ int check_auth(char *login, char *passwd)
     /* Root forced password expiration */
     if (spwd->sp_lstchg == 0)
 	return STATUS_PW_EXPIRED;
-	    
+
     /* Normal password expiration */
     if (spwd->sp_max >= 0 && spwd->sp_lstchg + spwd->sp_max < today)
 	return STATUS_PW_EXPIRED;
