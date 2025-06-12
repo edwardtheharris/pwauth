@@ -1,140 +1,197 @@
 ---
-abstract: This is the documentation index for pwauth.
-authors:
-  - name: Jan Wolter
-    email: jan@unixpapa.com
-  - name: Xander Harris
-    email: xandertheharris@gmail.com
-date: 2025-05-14
-title: pwauth Change Log
+abstract: This is the pwauth change log.
+
+title: pwauth change log
+
 ---
 
-## v2.3.12
 
-- TBD
-  - Clean up the documentation.
-  - Make the thing build on ArchLinux.
+All notable changes to this project will be documented in this file.
 
-## [v2.3.11](https://github.com/edwardtheharris/pwauth/releases/tag/v2.3.11)
+## [2.3.11] - 2025-06-12
 
-- Aug 1, 2018
-  - Don't define "uid" variable if SERVER_UID is not defined.
-  - Removed old-style strchr prototype.
-  - Clarified some instructions in config.h.
+### 💼 Other
 
-## [v2.3.10](https://github.com/edwardtheharris/pwauth/releases/tag/v2.3.10)
+- Copy boilerplate
 
-- Oct 5, 2011
-  - Changed the serialized sleep code in snooze.c to use fcntl() locking
-    instead of flock() locking. Fcntl() locking is a POSIX standard and
-    is likely to work better on more systems, notably including Solaris
-    which doesn't seem to support flock() at all any more.
-  - Minor fixes to typos in various documentation.
+Closes #2
+- Update codeql
 
-## [v2.3.9](https://github.com/edwardtheharris/pwauth/releases/tag/v2.3.9)
+Closes #2
+- Drop travis
 
-- May 2, 2011
-  - Add AUTHENTICATE_AIX option for authenticating via AIX's authentication
-    configuration system. Thanks to Hans Dieter Petersen of the University
-    of Bonn for this implementation.
-  - Renamed PAM_OS_X configuration setting to PAM_OLD_OS_X since it only
-    is needed for OS X 10.5 and older.
-  - Rearranged ifdef's so that undefining SLEEP_LOCK actually completely
-    disables the sleep-on-failure behavior.
-  - Minor documentation fixes
+Closes #2
+- Drop extra docs
 
-## [v2.3.8](https://github.com/edwardtheharris/pwauth/releases/tag/v2.3.8)
+Closes #2
+- Add init docs
 
-- Apr 3, 2009
-  - Clearing `SERVER_UIDS` now disables the runtime `uid` check. Documentation
-    added to suggest using this, together with group execution permissions on
-    the binary, to create a group for users who can run `pwauth`. Thanks to
-    [Adi Kriegisch](adi@kriegisch.at) for suggesting this.
-  - Return a distinct status code if authentication fails because we are not
-    running as root. This is currently only done for SHADOW_SUN, SHADOW_BSD,
-    SHADOW_AIX, and SHADOW_MDW. It's just to help confused installers
-    figure out why things aren't working.
-  - Warn installers that they may need to install PAM development packages.
+Closes #2
+- Update indexes
 
-## VERSION 2.3.7
+Closes #2
+- Update docs
 
-- Jan 9, 2009 (2009-01-09)
-  - DOCUMENTATION FIX ONLY
-  - Corrected erroneous `AuthBasicProvider` command in [install](install.md) file.
+Closes #2
+- Add logo, other docs
 
-## VERSION 2.3.6
+Closes #2
+- Update docs some more
 
-- May 19, 2008
-  - Add PAM_OS_X option.
-  - Clarified comments in {file}`pwauth/config.h`.
-  - Replace wildly obsolete inclusion of strings.h with inclusion of string.h
+Closes #2
+- Update changes
 
-## VERSION 2.3.5
+Closes #2
+- Update for lint
 
-- Dec 17, 2007
-  - Fixed return codes from AIX and HPUX versions (thanks to Paul Marvin for
-    finding this bug).
+Closes #2
+- Fix docs build
 
-## VERSION 2.3.4
+Closes #2
+- Drop requirement for python
 
-- Nov 11, 2007
-  - Fixed PAM_SOLARIS define.
+Closes #2
+- Don't run coveralls
 
-## VERSION 2.3.3
+Closes #2
+- Update docs
 
-- Sep 1, 2007
-  - Don't allow logins during inactive period after password expiration.
+Closes #2
+- Update format
 
-## VERSION 2.3.2
+Closes #2
+- Worry about docs later
 
-- Feb 19, 2006
-  - Update documentation to discuss usage with mod_authnz_external.
-  - Update documentation to discuss use of mod_authz_unixgroup instead of the
-    unixgroup script.
-  - Drop "development release" notation.
+Closes #2
+- Update reqs
 
-## VERSION 2.3.1
+Closes #2
+- Update output
 
-- Jan 10, 2005
-  - Fix the checks for expired passwords and expired accounts for
-    LOGIN_CONF_OPENBSD configurations.
-  - Fix the handling of the pam_message argument to the conversation function
-    for Solaris. The old handling was right for Linux PAM and OpenPAM, but
-    not for Solaris. However, the bug occurs only when the PAM modules passes
-    more than one prompt to the conversation function, which should probably
-    never happen.
+Closes #2
+- Update requirements
 
-## VERSION 2.3.0
+Closes #2
+- Drop updated makefile
 
-- Sep 28, 2004
-  - Status code values returned by pwauth have changed. 0 is still success,
-    of course, but there is a much wider range of non-zero error codes returned
-    to indicate different causes of login failure.
-  - Pwauth now checks for /etc/nologin file by default. Undefine
-    NOLOGIN_FILE in config.h if you don't want this behavior.
-  - Pwauth now checks if an account is expired and refuses logins if it is.
-    Undefine CHECK_LOGIN_EXPIRATION in config.h if you don't want this
-    behavior.
-  - Pwauth now checks if an account's password has expired and refuses logins
-    if it is and if logins are supposed to be disabled when the password has
-    expired. Undefine CHECK_PASSWORD_EXPIRATION if you don't want this
-    behavior.
-  - Added support for authenticating through login.conf interface on OpenBSD.
-    Support for login.conf systems on other versions of Unix is not yet here.
-  - Added support for OpenBSD failure logs.
-  - Source code split into multiple files.
-  - Added 'checkfaillog' program which CGIs can run to report/reset failures
-    and admins can run to reset failure counts.
+Closes #2
+- Merge pull request #4 from edwardtheharris/2-add-ci
 
-## VERSION 2.2.8
+Copy boilerplate
 
-- Sep 25, 2004
-  - First separate distribution of pwauth. This version is identical to
-    the version in the mod_auth_external version 2.2.8 package, except for
-    repackaging and slight modifications to the documentation.
+Closes #2
+- Update changelog
 
-```{note}
-Versions of pwauth previous to version 2.2.8 were distributed as part of
-the mod_auth_external package, and change-log information is included in
-pwauth change log.
-```
+Closes #6
+- Merge pull request #10 from edwardtheharris/6-238
+
+Update changelog
+
+Closes #6
+- Set release 2.3.9
+
+Closes #7
+- Merge pull request #11 from edwardtheharris/7-239
+
+Set release 2.3.9
+
+Closes #7
+- Set v2.3.10
+
+Closes #8
+- Merge pull request #12 from edwardtheharris/8-2310
+
+Set v2.3.10
+
+Closes #8
+- Set 2.3.11
+
+Closes #9
+- Merge pull request #13 from edwardtheharris/9-2311
+
+Set 2.3.11
+
+Closes #9
+- Update changelog
+
+Closes #5
+- Merge pull request #14 from edwardtheharris/5-create-releases
+
+Update changelog
+
+Closes #5
+- Fix checkfaillog.c
+
+Closes #15
+- Merge pull request #16 from edwardtheharris/15-fix-checkfaillogc
+
+Fix checkfaillog.c
+
+Closes #15
+- Add makefile
+
+Closes #17
+- Update filenames
+
+Closes #17
+- Update cliff
+
+Closes #17
+
+## [2.3.11] - 2025-06-12
+
+### 💼 Other
+
+- Don't define "uid" if SERVER_UID not defined.
+- Removed old style strchr() prototype.
+- Clarified some instructions.
+- Clarified some instructions.
+- Fixes to Fail Log code, thanks to lsmarandir
+- Accepting patch from issue #8
+- Handle locked user accounts
+
+Prevent pwauth from crashing when logging into a locked account
+- Merge pull request #11 from sgtio/master
+
+Handle locked user accounts
+- Quiet compiler warnings for signatures
+
+There are missing/incomplete function declarations.  Also a missing
+header.
+
+Signed-off-by: Philip Prindeville <philipp@redfish-solutions.com>
+- Merge pull request #12 from pprindeville/fedora-fixes
+
+Quiet compiler warnings for signatures
+- Add Travis build instructions
+
+Signed-off-by: Philip Prindeville <philipp@redfish-solutions.com>
+- Merge pull request #14 from pprindeville/travis-support
+
+Add Travis build instructions
+
+## [2.3.10] - 2011-10-05
+
+### 💼 Other
+
+- Convert to using fcntl() locking instead of flock() for improved portability.
+- Add 'pwauth.tar' target to Makefile to make it easier to roll out tarballs
+
+## [2.3.9] - 2011-05-02
+
+### 💼 Other
+
+- Minor Documentation Fixes
+- Rearranged ifdefs so that undefining SLEEP_LOCK completely disables the
+sleep on failure behavior.
+- Rearranged ifdefs so that undefining SLEEP_LOCK completely disables the sleep on failure behavior
+- OS X no longer puts the PAM header files in a weird place.
+- AIX authenticate() interface.
+
+## [2.3.8] - 2009-04-03
+
+### 💼 Other
+
+- Initial Import
+
+<!-- generated by git-cliff -->
