@@ -40,3 +40,7 @@ originally wrote this software in 1996.
 ```{sectionauthor} Xander Harris <xandertheharris@gmail.com>
 
 ```
+
+```{sectionauthor} Jan Wolter <jan@unixpapa.com>
+
+```
