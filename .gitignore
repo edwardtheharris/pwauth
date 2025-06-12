@@ -1,3 +1,4 @@
 _build/
+*.o
 markdownlint-cli2-junit.xml
 reflog

@@ -5,9 +5,8 @@
 #   LIB=      libraries to link in.  -lcrypt, -lshadow, -lpam sometimes needed.
 #   LOCALFLAGS=   compiler flags.  Usually -g, -O, and stuff like that.
 
-# Settings for author's system (Redhat 6.1)
 CC=gcc
-LIB= -lcrypt
+LIB= -lpam -lcrypt
 LOCALFLAGS= -g
 
 # For PAM on Redhat Linux
@@ -17,13 +16,18 @@ LOCALFLAGS= -g
 # LIB=-lpam
 
 # -------------------- No User Servicable Parts Below -----------------------
+help:
+	@$(MAKE) --help
 
-TAR= README INSTALL CHANGES FORM_AUTH Makefile main.c checkfaillog.c \
+%: help
+
+
+TAR=readme.md install.md CHANGES FORM_AUTH Makefile main.c checkfaillog.c \
 	fail_check.c fail_log.c lastlog.c nologin.c snooze.c auth_aix.c \
 	auth_bsd.c auth_hpux.c auth_mdw.c auth_openbsd.c auth_pam.c \
 	auth_sun.c config.h fail_log.h pwauth.h unixgroup
 
-.PHONY: clean distclean
+.PHONY: clean distclean help
 
 CFLAGS= $(LOCALFLAGS)
 
@@ -54,10 +58,11 @@ snooze.o: snooze.c config.h pwauth.h
 
 
 clean:
-	rm -f *.o
+	rm -fv *.o
 
 distclean:
-	rm -f *.o pwauth checkfaillog
+	rm -fv *.o pwauth checkfaillog
 
 pwauth.tar: $(TAR)
 	tar cvf pwauth.tar $(TAR)
+
