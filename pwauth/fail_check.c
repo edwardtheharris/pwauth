@@ -31,15 +31,15 @@
  * =======================================================================
  */
 
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 #include <utmp.h>
 
 #include "config.h"
 #include "fail_log.h"
-
 
 #ifdef FAILLOG_JFH
 /* CHECK_FAILS - Read the faillog file entry for the given uid.  Return NULL
@@ -52,62 +52,54 @@
  *      <count> failures since last login.  Last was <time> on <tty>.\n
  */
 
-char *check_fails(uid_t uid, int reset, int verbose)
-{
-    struct faillog flog;
-    int flfd;
-    static char buf[1024];
-    char *ct;
-    time_t now;
+char *check_fails(uid_t uid, int reset, int verbose) {
+  struct faillog flog;
+  int flfd;
+  static char buf[1024];
+  char *ct;
+  time_t now;
 
-    /* Return null if we can't open the file */
-    if ((flfd= open(PATH_FAILLOG, reset ? O_RDWR : O_RDONLY)) < 0)
-	return NULL;
+  /* Return null if we can't open the file */
+  if ((flfd = open(PATH_FAILLOG, reset ? O_RDWR : O_RDONLY)) < 0)
+    return NULL;
 
-    /* Read the log file entry for this user - if none then there have
-     * been no failures */
-    lseek(flfd, uid * sizeof(struct faillog), 0);
-    if (read(flfd, &flog, sizeof(struct faillog)) != sizeof(struct faillog))
-    {
-	close(flfd);
-	return NULL;
-    }
-
-    /* Check if there have been any failures */
-    if (flog.fail_cur <= 0)
-    {
-	close(flfd);
-	return NULL;
-    }
-
-    /* Generate the result message */
-    if (verbose)
-    {
-	time(&now);
-	ct= ctime(&flog.fail_time);
-	ct[24]= '\0';
-	if (now - flog.fail_time < (365*24*3600))
-	    ct[19]= '\0';
-	if (now - flog.fail_time < (24*3600))
-	    ct+= 11;
-	sprintf(buf,"%d %s since last login.  Last was %s on %s.",
-	    flog.fail_cnt, flog.fail_cnt == 1 ? "failure" : "failures",
-	    ct, flog.fail_line);
-    }
-    else
-	sprintf(buf,"%d:%ld::%s",
-	    flog.fail_cnt, flog.fail_time, flog.fail_line);
-
-    /* Reset the count, if that was desired */
-    flog.fail_cnt= 0;
-    lseek(flfd, uid * sizeof(struct faillog), 0);
-    write(flfd, &flog, sizeof(struct faillog));
+  /* Read the log file entry for this user - if none then there have
+   * been no failures */
+  lseek(flfd, uid * sizeof(struct faillog), 0);
+  if (read(flfd, &flog, sizeof(struct faillog)) != sizeof(struct faillog)) {
     close(flfd);
+    return NULL;
+  }
 
-    return buf;
+  /* Check if there have been any failures */
+  if (flog.fail_cur <= 0) {
+    close(flfd);
+    return NULL;
+  }
+
+  /* Generate the result message */
+  if (verbose) {
+    time(&now);
+    ct = ctime(&flog.fail_time);
+    ct[24] = '\0';
+    if (now - flog.fail_time < (365 * 24 * 3600))
+      ct[19] = '\0';
+    if (now - flog.fail_time < (24 * 3600))
+      ct += 11;
+    sprintf(buf, "%d %s since last login.  Last was %s on %s.", flog.fail_cnt,
+            flog.fail_cnt == 1 ? "failure" : "failures", ct, flog.fail_line);
+  } else
+    sprintf(buf, "%d:%ld::%s", flog.fail_cnt, flog.fail_time, flog.fail_line);
+
+  /* Reset the count, if that was desired */
+  flog.fail_cnt = 0;
+  lseek(flfd, uid * sizeof(struct faillog), 0);
+  write(flfd, &flog, sizeof(struct faillog));
+  close(flfd);
+
+  return buf;
 }
 #endif /* FAILLOG_JFH */
-
 
 #ifdef FAILLOG_OPENBSD
 /* CHECK_FAILS - Read the faillog file entry for the given uid.  Return NULL
@@ -120,63 +112,60 @@ char *check_fails(uid_t uid, int reset, int verbose)
  *   <count> failures since last login.  Last was <time> from <host> on <tty>.\n
  */
 
-char *check_fails(uid_t uid, int reset, int verbose)
-{
-    struct badlogin flog;
-    int flfd;
-    static char buf[1024];
-    char *ct;
-    time_t now;
+char *check_fails(uid_t uid, int reset, int verbose) {
+  struct badlogin flog;
+  int flfd;
+  static char buf[1024];
+  char *ct;
+  time_t now;
+  FILE *PATH_FAILLOG;
 
-    /* Return null if we can't open the file */
-    if ((flfd= open(PATH_FAILLOG, reset ? O_RDWR : O_RDONLY)) < 0)
-	return NULL;
+  /* Return null if we can't open the file */
+  if ((flfd = open(PATH_FAILLOG, reset ? O_RDWR : O_RDONLY)) < 0) {
+    return NULL;
+  }
 
-    /* Read the log file entry for this user - if none then there have
-     * been no failures */
-    lseek(flfd, uid * sizeof(struct badlogin), 0);
-    if (read(flfd, &flog, sizeof(struct badlogin)) != sizeof(struct badlogin))
-    {
-	close(flfd);
-	return NULL;
-    }
-
-    /* Check if there have been any failures */
-    if (flog.count <= 0)
-    {
-	close(flfd);
-	return NULL;
-    }
-
-    /* Generate the result message */
-    if (verbose)
-    {
-	time(&now);
-	ct= ctime(&flog.bl_time);
-	ct[24]= '\0';
-	if (now - flog.bl_time < (365*24*3600))
-	    ct[19]= '\0';
-	if (now - flog.bl_time < (24*3600))
-	    ct+= 11;
-	if (flog.bl_host[0] != '\0')
-	    sprintf(buf,"%d %s since last login.  Last was %s from %s on %s.",
-		flog.count, flog.count == 1 ? "failure" : "failures",
-		ct, flog.bl_host, flog.bl_line);
-	else
-	    sprintf(buf,"%d %s since last login.  Last was %s on %s.",
-		flog.count, flog.count == 1 ? "failure" : "failures",
-		ct, flog.bl_line);
-    }
-    else
-	sprintf(buf,"%d:%ld:%s:%s",
-	    flog.count, flog.bl_time, flog.bl_host, flog.bl_line);
-
-    /* Reset the count, if that was desired */
-    flog.count= 0;
-    lseek(flfd, uid * sizeof(struct badlogin), 0);
-    write(flfd, &flog, sizeof(struct badlogin));
+  /* Read the log file entry for this user - if none then there have
+   * been no failures */
+  lseek(flfd, uid * sizeof(struct badlogin), 0);
+  if (fread(flfd, &flog, sizeof(struct badlogin), ) !=
+      sizeof(struct badlogin)) {
     close(flfd);
+    return NULL;
+  }
 
-    return buf;
+  /* Check if there have been any failures */
+  if (flog.count <= 0) {
+    close(flfd);
+    return NULL;
+  }
+
+  /* Generate the result message */
+  if (verbose) {
+    time(&now);
+    ct = ctime(&flog.bl_time);
+    ct[24] = '\0';
+    if (now - flog.bl_time < (365 * 24 * 3600))
+      ct[19] = '\0';
+    if (now - flog.bl_time < (24 * 3600))
+      ct += 11;
+    if (flog.bl_host[0] != '\0')
+      sprintf(buf, "%d %s since last login.  Last was %s from %s on %s.",
+              flog.count, flog.count == 1 ? "failure" : "failures", ct,
+              flog.bl_host, flog.bl_line);
+    else
+      sprintf(buf, "%d %s since last login.  Last was %s on %s.", flog.count,
+              flog.count == 1 ? "failure" : "failures", ct, flog.bl_line);
+  } else
+    sprintf(buf, "%d:%ld:%s:%s", flog.count, flog.bl_time, flog.bl_host,
+            flog.bl_line);
+
+  /* Reset the count, if that was desired */
+  flog.count = 0;
+  lseek(flfd, uid * sizeof(struct badlogin), 0);
+  write(flfd, &flog, sizeof(struct badlogin));
+  close(flfd);
+
+  return buf;
 }
 #endif

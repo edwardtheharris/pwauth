@@ -44,15 +44,10 @@ int server_uids[] = {SERVER_UIDS, 0};
 #endif
 
 int main(int argc, char **argv) {
-#ifdef ENV_METHOD
-  char *login, *passwd;
-#else
   char login[BFSZ + 1], passwd[BFSZ + 1];
   char *c;
-#endif
-#ifdef SERVER_UIDS
+
   int uid;
-#endif
   int i;
   int status;
   struct rlimit rlim;
@@ -106,10 +101,11 @@ int main(int argc, char **argv) {
 
   bzero(passwd, strlen(passwd)); /* Erase plain-text from our memory */
 
-#if defined(FAILLOG_JFH) || defined(FAILLOG_OPENBSD) || defined(FAILLOG_PWAUTH)
-  if (status == STATUS_OK && !check_fails())
-    status = STATUS_MANYFAILS;
-#endif
+  // #if defined(FAILLOG_JFH) || defined(FAILLOG_OPENBSD) ||
+  // defined(FAILLOG_PWAUTH)
+  //  if (status == STATUS_OK && !check_fails())
+  //    status = STATUS_MANYFAILS;
+  // #endif
 
 #ifdef NOLOGIN_FILE
   if (status == STATUS_OK && !check_nologin())
@@ -127,9 +123,9 @@ int main(int argc, char **argv) {
     exit(STATUS_OK);
   } else {
     /* Bad login */
-#ifdef KEEP_FAILLOG
-    log_failure();
-#endif
+// #ifdef KEEP_FAILLOG
+//     log_failure();
+// #endif
 #ifdef SLEEP_LOCK
     snooze(SLEEP_TIME);
 #endif

@@ -32,6 +32,8 @@
  */
 
 #include "pwauth.h"
+#include <time.h>
+#include <utmp.h>
 
 #ifdef RESET_FAIL_COUNT
 #define MODE_FAILLOG O_RDWR
@@ -47,63 +49,58 @@
  * uses this anymore, so I'm not going to bother implementing that.
  */
 
-int check_fails()
-{
-    int result= 1;
-    struct faillog flog;
-    int flfd;
+int check_fails() {
+  int result = 1;
+  struct faillog flog;
+  int flfd;
 
-    if (!haveuid) return 1;
+  if (!haveuid)
+    return 1;
 
-    if ((flfd= open(PATH_FAILLOG,MODE_FAILLOG)) >= 0)
-    {
-	lseek(flfd, hisuid * sizeof(struct faillog), 0);
-	result= (read(flfd, &flog, sizeof(struct faillog))
-	         != sizeof(struct faillog)) ||
-	        flog.fail_max == 0 || flog.fail_cur < flog.fail_max;
-	close(flfd);
-    }
-    return result;
+  if ((flfd = open(PATH_FAILLOG, MODE_FAILLOG)) >= 0) {
+    lseek(flfd, hisuid * sizeof(struct faillog), 0);
+    result =
+        (read(flfd, &flog, sizeof(struct faillog)) != sizeof(struct faillog)) ||
+        flog.fail_max == 0 || flog.fail_cur < flog.fail_max;
+    close(flfd);
+  }
+  return result;
 }
-
 
 /* LOG_FAILURE - Do whatever we need to do to log a failed login attempt.
  */
 
-void log_failure()
-{
-    int flfd;
-    struct faillog flog;
+void log_failure() {
+  int flfd;
+  struct faillog flog;
 
-    if (!haveuid) return;
+  if (!haveuid)
+    return;
 
-    /* Log the failure in /var/adm/faillog - JFH style */
-    if ((flfd= open(PATH_FAILLOG,O_RDWR)) > 0)
-    {
-	/* Read the user's record (indexed by uid) */
-	lseek(flfd, hisuid * sizeof(struct faillog), 0);
-	if (read(flfd,&flog,sizeof(struct faillog)) != sizeof(struct faillog))
-	{
-	    flog.fail_cnt= 0;
-	    flog.fail_max= 0;
-	    flog.fail_time= 0L;
-	    flog.failline[0]= '\0';
-	}
-
-	/* Increment the count (checking for overflow) */
-	if (flog.fail_cnt + 1 > 0)
-		flog.fail_cnt++;
-	flog.fail_time= time(0L);
-	strcpy(flog.fail_line,"http");
-
-	/* Write it back out */
-	lseek(flfd, hisuid * sizeof(struct faillog), 0);
-	write(flfd, &flog, sizeof(struct faillog));
-	close(flfd);
+  /* Log the failure in /var/adm/faillog - JFH style */
+  if ((flfd = open(PATH_FAILLOG, O_RDWR)) > 0) {
+    /* Read the user's record (indexed by uid) */
+    lseek(flfd, hisuid * sizeof(struct faillog), 0);
+    if (read(flfd, &flog, sizeof(struct faillog)) != sizeof(struct faillog)) {
+      flog.fail_cnt = 0;
+      flog.fail_max = 0;
+      flog.fail_time = 0L;
+      flog.failline[0] = '\0';
     }
+
+    /* Increment the count (checking for overflow) */
+    if (flog.fail_cnt + 1 > 0)
+      flog.fail_cnt++;
+    flog.fail_time = time(0L);
+    strcpy(flog.fail_line, "http");
+
+    /* Write it back out */
+    lseek(flfd, hisuid * sizeof(struct faillog), 0);
+    write(flfd, &flog, sizeof(struct faillog));
+    close(flfd);
+  }
 }
 #endif /* FAILLOG_JFH */
-
 
 #ifdef FAILLOG_OPENBSD
 /* CHECK_FAILS - Check if the account is disabled due to the maximum number of
@@ -112,78 +109,75 @@ void log_failure()
  * been exceeded, then the count is reset to zero.
  */
 
-int check_fails()
-{
-    int result= 1;
+int check_fails() {
+  int result = 1;
 #if defined(MAX_FAIL_COUNT) || defined(RESET_FAIL_COUNT)
-    struct badlogin flog;
-    int flfd;
+  struct badlogin flog;
+  int flfd;
 
-    if (!haveuid) return 1;
+  if (!haveuid)
+    return 1;
 
-    if ((flfd= open(PATH_FAILLOG,MODE_FAILLOG)) >= 0)
-    {
-	/* Read user's record (indexed by uid) */
-	lseek(flfd, hisuid * sizeof(struct badlogin), 0);
-	if (read(flfd, &flog, sizeof(struct badlogin)) !=
-		sizeof(struct badlogin) || flog.bl_time == 0)
-	    memset(&flog, 0, sizeof(struct badlogin));
+  if ((flfd = open(PATH_FAILLOG, MODE_FAILLOG)) >= 0) {
+    /* Read user's record (indexed by uid) */
+    lseek(flfd, hisuid * sizeof(struct badlogin), 0);
+    if (read(flfd, &flog, sizeof(struct badlogin)) != sizeof(struct badlogin) ||
+        flog.bl_time == 0)
+      memset(&flog, 0, sizeof(struct badlogin));
 #ifdef MAX_FAIL_COUNT
-	result= (flog.count < MAX_FAIL_COUNT);
+    result = (flog.count < MAX_FAIL_COUNT);
 #endif
 #ifdef RESET_FAIL_COUNT
-	if (result && flog.count > 0)
-	{
-	    flog.count= 0;
-	    lseek(flfd, hisuid * sizeof(struct badlogin), 0);
-	    write(flfd, &flog, sizeof(struct badlogin));
-	}
-#endif
-	close(flfd);
+    if (result && flog.count > 0) {
+      flog.count = 0;
+      lseek(flfd, hisuid * sizeof(struct badlogin), 0);
+      write(flfd, &flog, sizeof(struct badlogin));
     }
+#endif
+    close(flfd);
+  }
 #endif /* MAX_FAIL_COUNT || RESET_FAIL_COUNT */
-    return result;
+  return result;
 }
-
 
 /* LOG_FAILURE - Do whatever we need to do to log a failed login attempt.
  */
 
-log_failure()
-{
-    int flfd;
-    struct badlogin flog;
-    char *host;
+void log_failure() {
+  int flfd;
+  struct badlogin flog;
+  char *host;
 
-    if (!haveuid) return;
+  if (!haveuid)
+    return;
 
-    /* Log the failure in /var/log/failedlogin - OpenBSD style */
-    if ((flfd= open(PATH_FAILLOG,O_RDWR)) > 0)
-    {
-	/* Read user's record (indexed by uid) */
-	lseek(flfd, hisuid * sizeof(struct badlogin), 0);
-	if (read(flfd, &flog, sizeof(struct badlogin)) !=
-		sizeof(struct badlogin) || flog.bl_time == 0)
-	    memset(&flog, 0, sizeof(struct badlogin));
+  /* Log the failure in /var/log/failedlogin - OpenBSD style */
+  if ((flfd = open(PATH_FAILLOG, O_RDWR)) > 0) {
+    /* Read user's record (indexed by uid) */
+    lseek(flfd, hisuid * sizeof(struct badlogin), 0);
+    if (read(flfd, &flog, sizeof(struct badlogin)) != sizeof(struct badlogin) ||
+        flog.bl_time == 0)
+      memset(&flog, 0, sizeof(struct badlogin));
 
-	/* Increment the count (checking for overflow) */
-	if (flog.count + 1 > 0)
-		flog.count++;
+    /* Increment the count (checking for overflow) */
+    if (flog.count + 1 > 0)
+      flog.count++;
 
-	/* Set time and remote host names */
-	time(&flog.bl_time);
-	strncpy(flog.bl_line, "http", sizeof(flog.bl_line));
-	if ((host= getenv("HOST")) == NULL) host= getenv("IP");
-	if (host != NULL)
-	    strncpy(flog.bl_host, host, sizeof(flog.bl_host));
-	else
-	    flog.bl_host[0]= '\0';
-	flog.bl_name[0]= '\0';		/* Remote name always unknown */
+    /* Set time and remote host names */
+    time(&flog.bl_time);
+    strncpy(flog.bl_line, "http", sizeof(flog.bl_line));
+    if ((host = getenv("HOST")) == NULL)
+      host = getenv("IP");
+    if (host != NULL)
+      strncpy(flog.bl_host, host, sizeof(flog.bl_host));
+    else
+      flog.bl_host[0] = '\0';
+    flog.bl_name[0] = '\0'; /* Remote name always unknown */
 
-	/* Write it back out */
-	lseek(flfd, hisuid * sizeof(struct badlogin), 0);
-	write(flfd, &flog, sizeof(struct badlogin));
-	close(flfd);
-    }
+    /* Write it back out */
+    lseek(flfd, hisuid * sizeof(struct badlogin), 0);
+    write(flfd, &flog, sizeof(struct badlogin));
+    close(flfd);
+  }
 }
 #endif
