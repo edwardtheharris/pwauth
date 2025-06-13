@@ -97,7 +97,7 @@ jobs:
       - name: Update package cache
         run: sudo apt-get update
       - name: Install pam
-        run: sudo apt-get install -y pam
+        run: sudo apt-get install -y libpam0g-dev
       # Autobuild attempts to build any compiled languages
       # (C/C++, C#, Go, Java, or Swift).
       # If this step fails, then you should remove it and run the build
