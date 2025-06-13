@@ -6,8 +6,8 @@
 #   LOCALFLAGS=   compiler flags.  Usually -g, -O, and stuff like that.
 
 CC=gcc
-LIB= -lpam -lcrypt
-LOCALFLAGS= -g
+LIB=-ldl -lpam -lcrypt
+LOCALFLAGS=-Og
 
 # For PAM on Redhat Linux
 # LIB=-lpam -ldl

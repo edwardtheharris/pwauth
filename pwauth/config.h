@@ -129,7 +129,7 @@
 
 /* HIGH-LEVEL OPTIONS */
 
-// #define PAM /* Linux PAM or OpenPAM */
+#define PAM /* Linux PAM or OpenPAM */
 // #define PAM_OLD_OS_X		/* PAM on OS X version 10.5 or older */
 // #define PAM_SOLARIS		/* PAM on Solaris other than 2.6 */
 // #define PAM_SOLARIS_26	/* PAM on Solaris 2.6 */
@@ -190,13 +190,13 @@
  * reports and resets the failure count.
  */
 
-/* #define FAILLOG_JFH				/**/
-/* #define FAILLOG_OPENBSD			/**/
-/* #define FAILLOG_PWAUTH			/**/
+/* #define FAILLOG_JFH				*/
+/* #define FAILLOG_OPENBSD			*/
+#define FAILLOG_PWAUTH
 
-/* #define PATH_FAILLOG "/var/log/faillog"	/**/
-/* #define MAX_FAIL_COUNT 40			/**/
-/* #define RESET_FAIL_COUNT			/**/
+// #define PATH_FAILLOG "/var/log/faillog"
+#define MAX_FAIL_COUNT 40
+#define RESET_FAIL_COUNT
 
 /* If UNIX_LASTLOG is defined, the program will update the lastlog entry so
  * that there is a record of the user having logged in.  This is important on
@@ -209,7 +209,7 @@
  * uid numbers.
  */
 
-#define UNIX_LASTLOG   /**/
+// #define UNIX_LASTLOG   /**/
 #define HAVE_LASTLOG_H /**/
 
 /* If NOLOGIN_FILE is defined to the full path name of a file, then the
@@ -272,7 +272,7 @@
  * to change the uid list.
  */
 
-#define SERVER_UIDS 30 /* user "wwwrun" on the author's system */
+#define SERVER_UIDS 1000 /* user "wwwrun" on the author's system */
 
 /* If MIN_UNIX_UID is defined to an integer, logins with uid numbers less than
  * that value will be rejected, even if the password is correct.
@@ -283,7 +283,7 @@
  * given value will be accepted).
  */
 
-#define MIN_UNIX_UID 500 /**/
+// #define MIN_UNIX_UID 500 /**/
 
 /* If IGNORE_CASE is defined, the login given is checked in two different
  * ways. First without any changes and then with all letters converted to
@@ -291,7 +291,7 @@
  * This ignores the case of the login name only, not the password.
  */
 
-/* #define IGNORE_CASE             /**/
+/* #define IGNORE_CASE            */
 
 /* If DOMAIN_AWARE is enabled, then we we check login names to see if they
  * contain a backslash, and discard anything up to and including the backslash.
@@ -299,7 +299,7 @@
  * to login names formed like "domain\username".
  */
 
-/* #define DOMAIN_AWARE            /**/
+/* #define DOMAIN_AWARE            */
 
 /* On failed authentications, pwauth will sleep for SLEEP_TIME seconds, using
  * a lock on the file whose full path is given by SLEEP_LOCK to prevent any
@@ -318,7 +318,7 @@
  * This is insecure on some versions of Unixes, but might be a bit faster.
  */
 
-/* #define ENV_METHOD		/**/
+/* #define ENV_METHOD		*/
 
 /* If /usr/include/paths.h exists define this.  Obviously I need to autoconfig
  * this.
